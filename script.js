@@ -63,7 +63,14 @@ const estimateStatus = document.getElementById('estimate-status');
 const apiBase = window.location.protocol === 'file:' ? 'http://localhost:3000' : window.location.origin;
 
 if (estimateForm) {
-    estimateForm.addEventListener('submit', async (event) => {
+    const usesFormspree = estimateForm.action.includes('formspree.io');
+
+    if (usesFormspree) {
+        if (estimateStatus) {
+            estimateStatus.textContent = 'We’ll send your request by email after you submit the form.';
+        }
+    } else {
+        estimateForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const formData = new FormData(estimateForm);
@@ -110,4 +117,5 @@ if (estimateForm) {
             }
         }
     });
+    }
 }
