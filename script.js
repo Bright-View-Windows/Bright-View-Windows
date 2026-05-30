@@ -65,9 +65,39 @@ if (estimateForm) {
     const usesFormspree = estimateForm.action.includes('formspree.io');
 
     if (usesFormspree) {
-        if (estimateStatus) {
-            estimateStatus.textContent = 'This form sends directly through Formspree.';
-        }
+        estimateForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (estimateStatus) {
+                estimateStatus.textContent = 'Sending request...';
+            }
+
+            try {
+                const response = await fetch(estimateForm.action, {
+                    method: 'POST',
+                    body: new FormData(estimateForm),
+                    headers: {
+                        Accept: 'application/json'
+                    }
+                });
+
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(result?.error || 'Request failed');
+                }
+
+                estimateForm.reset();
+                if (estimateStatus) {
+                    estimateStatus.textContent = 'Request sent successfully. We will contact you soon.';
+                }
+            } catch (error) {
+                console.error('Formspree submit failed:', error);
+                if (estimateStatus) {
+                    estimateStatus.textContent = error?.message ? `Could not send right now: ${error.message}` : 'Could not send right now. Please try again in a moment.';
+                }
+            }
+        });
     } else {
         estimateForm.addEventListener('submit', async (event) => {
             event.preventDefault();
