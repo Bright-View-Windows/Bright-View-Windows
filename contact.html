@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright View Window</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="header">
+        <img src="img/logo.png" class="logo" alt="Bright View Window Washing logo">
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a class="active" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><i id="bar" class="fa-solid fa-bars"></i></button>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h1>Contact Bright View</h1>
+        <p>Ready to schedule a window cleaning or get a free estimate?</p>
+    </section>
+
+    <section class="section-p1">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="reveal-on-scroll">Contact Information</h2>
+                <div class="info-box reveal-on-scroll">
+                    <h4><i class="fas fa-envelope"></i> Email</h4>
+                    <p>brightviewwindows253@gmail.com</p>
+                </div>
+                <div class="info-box reveal-on-scroll">
+                    <h4><i class="fas fa-map-marker-alt"></i> Location</h4>
+                    <p>Local window washing for homes and businesses.</p>
+                </div>
+                <div class="info-box reveal-on-scroll">
+                    <h4><i class="fas fa-clock"></i> Availability</h4>
+                    <p>Monday-Friday, 3:00–6:00 PM.</p>
+                </div>
+            </div>
+
+            <div class="contact-form reveal-on-scroll">
+                <h2 class="reveal-on-scroll">Request a Free Estimate</h2>
+                <form id="estimate-form" class="reveal-on-scroll">
+                    <label for="customer-name">Name</label>
+                    <input id="customer-name" name="name" type="text" placeholder="Your full name" required>
+
+                    <label for="customer-email">Email</label>
+                    <input id="customer-email" name="email" type="email" placeholder="you@example.com" required>
+
+                    <label for="customer-phone">Phone</label>
+                    <input id="customer-phone" name="phone" type="tel" placeholder="(555) 555-5555" required>
+
+                    <label for="customer-address">Address</label>
+                    <input id="customer-address" name="address" type="text" placeholder="Street, City, State, ZIP" required>
+
+                    <label for="property-details">About Property</label>
+                    <textarea id="property-details" name="details" placeholder="Tell us about your property, windows, and anything we should know." rows="5"></textarea>
+                    <button type="submit" class="normal">Send Request</button>
+                    <p id="estimate-status" class="estimate-status" aria-live="polite"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-p1">
+        <h2 class="reveal-on-scroll">Why Contact Bright View?</h2>
+        <p>We deliver clean, clear windows with the care and professionalism you expect from a local service provider.</p>
+        <div class="features-grid">
+            <div class="feature reveal-on-scroll">
+                <h4><i class="fas fa-handshake"></i> Reliable Service</h4>
+                <p>We show up on time and leave your windows crystal clear.</p>
+            </div>
+            <div class="feature reveal-on-scroll">
+                <h4><i class="fas fa-money-bill-wave"></i> Transparent Pricing</h4>
+                <p>Clear estimates and no hidden fees.</p>
+            </div>
+            <div class="feature reveal-on-scroll">
+                <h4><i class="fas fa-calendar-alt"></i> Flexible Scheduling</h4>
+                <p>Appointments that fit your routine.</p>
+            </div>
+            <div class="feature reveal-on-scroll">
+                <h4><i class="fas fa-star"></i> Spotless Results</h4>
+                <p>Every job is finished with a streak-free shine.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="index.html" class="footer-logo-link"><img class="logo" src="img/logo.png" alt="Bright View Window Washing logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Email: </strong>brightviewwindows253@gmail.com</p>
+            <p><strong>Location: </strong>Serving your local area with expert window care.</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f" onclick="window.open('https://www.facebook.com/profile.php?id=61567373923346', '_blank');"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>Services</h4>
+            <a href="services.html">Residential Cleaning</a>
+            <a href="services.html">Commercial Washing</a>
+            <a href="services.html">Maintenance Programs</a>
+            <a href="services.html">Window Care</a>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">Our Story</a>
+            <a href="about.html">Approach</a>
+            <a href="#">FAQs</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="col footer-newsletter">
+            <h4>Request a Quote</h4>
+            <p>Reach out and we’ll help you plan your next window wash. Monday-Friday, 3:00–6:00 PM.</p>
+            <div class="footer-news-form">
+                <a href="contact.html" class="normal">Contact Us</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2026, Bright View Window Washing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
