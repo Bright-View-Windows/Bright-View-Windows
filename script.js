@@ -60,62 +60,61 @@ document.querySelectorAll('.reveal-on-scroll').forEach(el => {
 
 const estimateForm = document.getElementById('estimate-form');
 const estimateStatus = document.getElementById('estimate-status');
-const apiBase = window.location.protocol === 'file:' ? 'http://localhost:3000' : window.location.origin;
 
 if (estimateForm) {
     const usesFormspree = estimateForm.action.includes('formspree.io');
 
     if (usesFormspree) {
         if (estimateStatus) {
-            estimateStatus.textContent = 'We’ll send your request by email after you submit the form.';
+            estimateStatus.textContent = 'This form sends directly through Formspree.';
         }
     } else {
         estimateForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+            event.preventDefault();
 
-        const formData = new FormData(estimateForm);
-        const name = String(formData.get('name') || '').trim();
-        const email = String(formData.get('email') || '').trim();
-        const phone = String(formData.get('phone') || '').trim();
-        const address = String(formData.get('address') || '').trim();
-        const details = String(formData.get('details') || '').trim();
+            const formData = new FormData(estimateForm);
+            const name = String(formData.get('name') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+            const phone = String(formData.get('phone') || '').trim();
+            const address = String(formData.get('address') || '').trim();
+            const details = String(formData.get('details') || '').trim();
 
-        if (estimateStatus) {
-            estimateStatus.textContent = 'Sending request...';
-        }
-
-        try {
-            const response = await fetch(`${apiBase}/api/estimate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json'
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    phone,
-                    address,
-                    details
-                })
-            });
-
-            const result = await response.json().catch(() => ({}));
-
-            if (!response.ok || !result.ok) {
-                throw new Error(result.message || 'Request failed');
-            }
-
-            estimateForm.reset();
             if (estimateStatus) {
-                estimateStatus.textContent = 'Request sent successfully. We will contact you soon.';
+                estimateStatus.textContent = 'Sending request...';
             }
-        } catch (error) {
-            console.error('Estimate submit failed:', error);
-            if (estimateStatus) {
-                estimateStatus.textContent = error?.message ? `Could not send right now: ${error.message}` : 'Could not send right now. Please try again in a moment.';
+
+            try {
+                const response = await fetch('/api/estimate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        address,
+                        details
+                    })
+                });
+
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.message || 'Request failed');
+                }
+
+                estimateForm.reset();
+                if (estimateStatus) {
+                    estimateStatus.textContent = 'Request sent successfully. We will contact you soon.';
+                }
+            } catch (error) {
+                console.error('Estimate submit failed:', error);
+                if (estimateStatus) {
+                    estimateStatus.textContent = error?.message ? `Could not send right now: ${error.message}` : 'Could not send right now. Please try again in a moment.';
+                }
             }
-        }
-    });
+        });
     }
 }
