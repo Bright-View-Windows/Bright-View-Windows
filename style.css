@@ -2623,8 +2623,10 @@ body:not(.show-install) .col.install { display: none !important; }
 .menu-toggle {
     width: 54px;
     height: 54px;
+    padding: 0;
     border: 0;
     border-radius: 50%;
+    appearance: none;
     background: var(--brand-primary);
     color: #fff;
     display: inline-flex;
@@ -2642,6 +2644,10 @@ body:not(.show-install) .col.install { display: none !important; }
 .menu-toggle i {
     font-size: 24px;
     color: #fff;
+    display: block;
+    width: 1em;
+    line-height: 1;
+    text-align: center;
     transition: transform .48s cubic-bezier(0.16, 1, 0.3, 1), opacity .24s ease;
     will-change: transform, opacity;
 }
