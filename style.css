@@ -1726,14 +1726,19 @@ footer .copyright{
     #mobile i{
         color: inherit;
         font-size: 24px;
-        padding-left: 20px;
+        padding-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
 
     #close{
         display: initial;
         position: absolute;
-        top: 30px;
-        left: 30px;
+        top: 24px;
+        right: 24px;
+        left: auto;
         color: #222;
         font-size: 24px;
     }
@@ -2616,8 +2621,8 @@ body:not(.show-install) .col.install { display: none !important; }
 }
 
 .menu-toggle {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border: 0;
     border-radius: 50%;
     background: var(--brand-primary);
@@ -2626,25 +2631,30 @@ body:not(.show-install) .col.install { display: none !important; }
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color .36s ease, color .36s ease, transform .42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow .36s ease;
+    transition: background-color .42s cubic-bezier(0.16, 1, 0.3, 1), color .42s cubic-bezier(0.16, 1, 0.3, 1), transform .48s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .42s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, background-color, box-shadow;
 }
 
 .menu-toggle i {
-    font-size: 28px;
+    font-size: 24px;
     color: #fff;
-    transition: transform .42s cubic-bezier(0.22, 1, 0.36, 1), opacity .24s ease;
+    transition: transform .48s cubic-bezier(0.16, 1, 0.3, 1), opacity .24s ease;
+    will-change: transform, opacity;
 }
 
 .menu-toggle.is-open {
     background: #5DBE3A;
     color: #fff;
-    transform: rotate(180deg);
+    transform: rotate(180deg) scale(1.03);
     box-shadow: none !important;
 }
 
 .menu-toggle.is-open i {
-    transform: rotate(180deg) translateY(2px);
+    transform: rotate(180deg) translateY(1px);
 }
 
 body.nav-open {
@@ -2669,7 +2679,7 @@ body::before {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .4s ease, visibility .4s ease;
+    transition: opacity .52s cubic-bezier(0.16, 1, 0.3, 1), visibility .52s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body.nav-open::before {
@@ -2692,7 +2702,7 @@ body.nav-open::before {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .48s ease, visibility 0s linear .48s;
+    transition: opacity .56s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s linear .56s;
     padding: 130px 24px 56px;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -2724,25 +2734,27 @@ body.nav-open::before {
     pointer-events: auto;
     transform: none;
     background: linear-gradient(145deg, rgba(0,82,163,0.96) 0%, rgba(93,190,58,0.92) 100%);
-    transition: opacity .48s ease, visibility 0s;
+    transition: opacity .56s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
 }
 
 #navbar li {
     padding: 0;
     margin: 0;
     opacity: 0;
-    transform: none;
-    transition: opacity .35s ease;
+    transform: translateY(10px);
+    transition: opacity .42s cubic-bezier(0.16, 1, 0.3, 1), transform .42s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #navbar.active li {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
 }
 
-#navbar li {
-    transition-delay: 0s;
-}
+#navbar li:nth-child(1) { transition-delay: .06s; }
+#navbar li:nth-child(2) { transition-delay: .10s; }
+#navbar li:nth-child(3) { transition-delay: .14s; }
+#navbar li:nth-child(4) { transition-delay: .18s; }
+#navbar li:nth-child(5) { transition-delay: .22s; }
 
 #navbar li a {
     font-size: clamp(1.15rem, 2.8vw, 1.8rem);
@@ -2824,8 +2836,8 @@ footer .follow i {
     }
 
     .menu-toggle {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
     }
 
     #navbar {
