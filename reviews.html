@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright View Window</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fix for dropdown text being cut off at bottom */
+        #review-rating {
+            line-height: 1.5;
+            padding: 8px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="header">
+        <img src="img/logo.png" class="logo" alt="Bright View Window Washing logo">
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a class="active" href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <button id="menu-toggle" class="menu-toggle" aria-label="Open menu" aria-expanded="false"><i id="bar" class="fa-solid fa-bars"></i></button>
+        </div>
+    </section>
+
+    <section id="page-header" class="reviews-header">
+        <div class="reviews-intro">
+            <h1>Customer Reviews</h1>
+            <p>Browse sample reviews, search by name or star rating, and use this page as a simple template for adding more testimonials later.</p>
+            <div class="reviews-stats" aria-label="Review highlights">
+                <span class="reviews-stat">Search by name</span>
+                <span class="reviews-stat">Filter by stars</span>
+                <span class="reviews-stat">Match related words</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-p1">
+        <div class="reviews-toolbar">
+            <div class="reviews-search">
+                <label for="review-search">Search reviews</label>
+                <input id="review-search" type="search" placeholder="Try a name, star rating, service, or keyword like streak-free or storefront">
+            </div>
+            <div class="reviews-rating">
+                <label for="review-rating">Star filter</label>
+                <select id="review-rating">
+                    <option value="all">All ratings</option>
+                    <option value="5">5 stars</option>
+                    <option value="4">4 stars</option>
+                    <option value="3">3 stars</option>
+                    <option value="2">2 stars</option>
+                    <option value="1">1 star</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="reviews-summary">
+            <p class="reviews-results" id="reviews-results" style="text-align: center;">0 reviews</p>
+        </div>
+
+        <div class="reviews-grid" id="reviews-grid" aria-live="polite"></div>
+        <p id="reviews-empty" class="reviews-empty" hidden>No reviews match that search yet. Try a different name, star rating, or keyword.</p>
+    </section>
+
+    <template id="review-card-template">
+        <article class="review-card reveal-on-scroll" data-review-card>
+            <header>
+                <div class="review-stars" data-review-stars aria-label="Star rating"></div>
+                <div class="review-name" data-review-name></div>
+                <div class="review-meta">
+                    <span data-review-service></span>
+                    <span data-review-date></span>
+                </div>
+            </header>
+            <p data-review-text></p>
+            <div class="review-tags" data-review-tags></div>
+        </article>
+    </template>
+
+    <footer class="section-p1">
+        <div class="col">
+            <a href="index.html" class="footer-logo-link"><img class="logo" src="img/logo.png" alt="Bright View Window Washing logo"></a>
+            <h4>Contact</h4>
+            <p><strong>Email: </strong>brightviewwindows253@gmail.com</p>
+            <p><strong>Location: </strong>Serving your local area with premium window care.</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f" onclick="window.open('https://www.facebook.com/profile.php?id=61567373923346', '_blank');"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>Services</h4>
+            <a href="services.html">Residential Cleaning</a>
+            <a href="services.html">Commercial Washing</a>
+            <a href="services.html">Maintenance Programs</a>
+            <a href="reviews.html">Reviews</a>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">Our Story</a>
+            <a href="about.html">Approach</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="col footer-newsletter">
+            <h4>Need a Quote?</h4>
+            <p>Want the same kind of finish these reviews talk about? Send us a message and we'll help you get started.</p>
+            <div class="footer-news-form">
+                <a href="contact.html" class="normal">Request a Quote</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2026, Bright View Window Washing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=3"></script>
+</body>
+
+</html>

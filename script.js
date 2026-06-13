@@ -148,3 +148,121 @@ if (estimateForm) {
         });
     }
 }
+
+const reviewData = [
+    {
+        name: 'Matt M.',
+        rating: 5,
+        service: 'Residential Cleaning',//either residential or commercial or maintenance 
+        date: 'May 2026',
+        text: 'The team did a great job and communication was excellentil A group of young adults starting a business and would encourage you to look at this team for your future exterior window cleaning needs!',
+        keywords: []//dont have anything
+    }
+];
+
+const reviewsGrid = document.getElementById('reviews-grid');
+const reviewSearch = document.getElementById('review-search');
+const reviewRating = document.getElementById('review-rating');
+const reviewResults = document.getElementById('reviews-results');
+const reviewEmpty = document.getElementById('reviews-empty');
+const reviewTemplate = document.getElementById('review-card-template');
+
+function normalizeText(value) {
+    return String(value || '')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function buildStars(rating) {
+    return Array.from({ length: 5 }, (_, index) => (
+        `<i class="fa${index < rating ? 's' : 'r'} fa-star" aria-hidden="true"></i>`
+    )).join('');
+}
+
+function renderReviews() {
+    if (!reviewsGrid || !reviewTemplate) return;
+
+    reviewsGrid.innerHTML = '';
+
+    reviewData.forEach((review, index) => {
+        const fragment = reviewTemplate.content.cloneNode(true);
+        const card = fragment.querySelector('[data-review-card]');
+        const stars = fragment.querySelector('[data-review-stars]');
+        const name = fragment.querySelector('[data-review-name]');
+        const service = fragment.querySelector('[data-review-service]');
+        const date = fragment.querySelector('[data-review-date]');
+        const text = fragment.querySelector('[data-review-text]');
+        const tags = fragment.querySelector('[data-review-tags]');
+
+        card.dataset.name = review.name;
+        card.dataset.rating = String(review.rating);
+        card.dataset.service = review.service;
+        card.dataset.keywords = review.keywords.join(' ');
+        card.dataset.search = normalizeText([
+            review.name,
+            review.service,
+            review.text,
+            review.rating,
+            `${review.rating} star`,
+            'star stars five star five-star',
+            review.keywords.join(' ')
+        ].join(' '));
+
+        card.style.setProperty('--reveal-delay', `${Math.min(index * 70, 350)}ms`);
+        stars.innerHTML = buildStars(review.rating);
+        name.textContent = review.name;
+        service.textContent = review.service;
+        date.textContent = review.date;
+        text.textContent = review.text;
+        if (tags) {
+            tags.innerHTML = review.keywords
+                .slice(0, 4)
+                .map(tag => `<span class="review-tag">${tag}</span>`)
+                .join('');
+        }
+
+        reviewsGrid.appendChild(fragment);
+        if (observer && card.classList.contains('reveal-on-scroll')) {
+            observer.observe(card);
+        }
+    });
+
+    filterReviews();
+}
+
+function filterReviews() {
+    if (!reviewsGrid) return;
+
+    const query = normalizeText(reviewSearch?.value || '');
+    const selectedRating = reviewRating?.value || 'all';
+    const cards = Array.from(reviewsGrid.querySelectorAll('[data-review-card]'));
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const searchText = card.dataset.search || '';
+        const rating = Number(card.dataset.rating || '0');
+        const matchesQuery = !query || searchText.includes(query);
+        const matchesRating = selectedRating === 'all' || rating === Number(selectedRating);
+        const isVisible = matchesQuery && matchesRating;
+
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+    });
+
+    if (reviewResults) {
+        reviewResults.textContent = `${visibleCount} review${visibleCount === 1 ? '' : 's'} shown`;
+    }
+
+    if (reviewEmpty) {
+        reviewEmpty.hidden = visibleCount !== 0;
+    }
+}
+
+if (reviewsGrid && reviewTemplate) {
+    renderReviews();
+
+    reviewSearch?.addEventListener('input', filterReviews);
+    reviewRating?.addEventListener('change', filterReviews);
+}
